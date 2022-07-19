@@ -21,7 +21,12 @@ let
         version = "0.4.1";
         sha256 = "16ll8829g8v5g6gqdcfj77k6g4sqpmpxbda9jhm4h68pycay4r6a";
       }));
+      optics = (pkgs.haskell.lib.overrideCabal super.optics_0_4 (old: {
+        version = "0.4.2";
+        # FIXME: I just copied this in for now
+        sha256 = "16ll8829g8v5g6gqdcfj77k6g4sqpmpxbda9jhm4h68pycay4r6b";
+      }));
     });
 });
   in
-nixpkgs.pkgs.haskell.packages.${compiler}.callPackage ./cabal2nix.nix {}
+hPackages.callPackage ./cabal2nix.nix {}
