@@ -13,19 +13,26 @@ in
 let
   hPackages = pkgs.haskell.packages.${compiler}.override (old: {
     overrides = pkgs.lib.composeExtensions old.overrides (self: super: rec {
-      optics-th = (pkgs.haskell.lib.overrideCabal super.optics-th_0_4 (old: {
-        version = "0.4.1";
-        sha256 = "05zxljfqmhr5if7l8gld5s864nql6kqjfizsf1z7r3ydknvmff6p";
-      })); #.overrideScope (_: _: {});
-      optics-core = (pkgs.haskell.lib.overrideCabal super.optics-core_0_4 (old: {
-        version = "0.4.1";
-        sha256 = "16ll8829g8v5g6gqdcfj77k6g4sqpmpxbda9jhm4h68pycay4r6a";
-      }));
-      optics = (pkgs.haskell.lib.overrideCabal super.optics_0_4 (old: {
-        version = "0.4.2";
-        # FIXME: I just copied this in for now
-        sha256 = "16ll8829g8v5g6gqdcfj77k6g4sqpmpxbda9jhm4h68pycay4r6b";
-      }));
+      optics = self.callHackageDirect {
+        pkg = "optics";
+        ver = "0.4.2";
+        sha256 = "sha256-QsR0UCUR2EUvPuOHHMXV7MeVgsXfcNzbuYiJ6q6pMx0=";
+      } {};
+      optics-th = self.callHackageDirect {
+        pkg = "optics-th";
+        ver = "0.4.1";
+        sha256 = "sha256-LswYTbNXkJja3vERy6ioTAYtfyUBTEspML5fr3YDWo4=";
+      } {};
+      optics-core = self.callHackageDirect {
+        pkg = "optics-core";
+        ver = "0.4.1";
+        sha256 = "sha256-JnSrzSZW1dRkKBbTamCc705eRXZzfpmqru4jOTe2dX4=";
+      } {};
+      optics-extra = self.callHackageDirect {
+        pkg = "optics-extra";
+        ver = "0.4.2";
+        sha256 = "sha256-fDjNpV09fZfpEfOLyPC6dXaolXhNY0N1A4bnDc5F8wo=";
+      } {};
     });
 });
   in
